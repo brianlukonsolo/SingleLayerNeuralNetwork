@@ -12,7 +12,6 @@ import java.util.Random;
  * Created by lordmcbrian on 29/05/2017.
  */
 public class Network {
-    private ArrayList<Double> targetOutputsList = new ArrayList<>();
     //Initialise default learning-rate
     private double learningRate = 0.01;
     private  double biasNeuronValue = 0.35;
@@ -21,7 +20,11 @@ public class Network {
 
     //These are storage
     private ArrayList<Double> inputsList = new ArrayList<>();
+    //The network will aim to achieve these targets
+    private ArrayList<Double> targetOutputsList = new ArrayList<>(); //TODO: implement targets in the code
+    //The actual results of the forward pass algorithm
     private ArrayList<Double> actualOutputsList = new ArrayList<>();
+    private ArrayList<Double> errorList = new ArrayList<>(); //TODO: implement error list in the code
 
     //A network contains input neurons, hidden neurons and output neurons
     private ArrayList<InputNeuron> inputNeuronsList = new ArrayList<>();
@@ -242,5 +245,37 @@ public class Network {
 
     public void setInputsList(ArrayList<Double> inputs) {
         this.inputsList = inputs;
+    }
+
+    public int getNUMBER_OF_OUTPUT_LAYER_NEURONS() {
+        return NUMBER_OF_OUTPUT_LAYER_NEURONS;
+    }
+
+    public void setNUMBER_OF_OUTPUT_LAYER_NEURONS(int NUMBER_OF_OUTPUT_LAYER_NEURONS) {
+        this.NUMBER_OF_OUTPUT_LAYER_NEURONS = NUMBER_OF_OUTPUT_LAYER_NEURONS;
+    }
+
+    public int getNUMBER_OF_HIDDEN_LAYER_NEURONS() {
+        return NUMBER_OF_HIDDEN_LAYER_NEURONS;
+    }
+
+    public void setNUMBER_OF_HIDDEN_LAYER_NEURONS(int NUMBER_OF_HIDDEN_LAYER_NEURONS) {
+        this.NUMBER_OF_HIDDEN_LAYER_NEURONS = NUMBER_OF_HIDDEN_LAYER_NEURONS;
+    }
+
+    public double getBiasNeuronValue() {
+        return biasNeuronValue;
+    }
+
+    public void setBiasNeuronValue(double biasNeuronValue) {
+        this.biasNeuronValue = biasNeuronValue;
+    }
+
+    public ArrayList<Double> getErrorList() {
+        return errorList;
+    }
+
+    public void setErrorList(ArrayList<Double> errorList) {
+        this.errorList = errorList;
     }
 }

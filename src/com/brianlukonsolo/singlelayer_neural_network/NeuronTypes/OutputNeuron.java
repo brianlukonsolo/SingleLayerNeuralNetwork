@@ -44,7 +44,7 @@ public class OutputNeuron {
             System.out.println("[ OutputNeuron Sum function ]>>> MULTIPLYING: " + d + " and " + weightsOfOutputsFromHiddenLayer.get(hiddenLayerOutputValuesList.indexOf(d)));
             //Add to the total
         }
-        System.out.println("[ HiddenNeuron Sigmoid function ]>>> Net sum is : " + netSum);
+        System.out.println("[ HiddenNeuron net Sum function ]>>> Net sum is : " + netSum);
         //Store the value for later use
         setNetSumOfTheInputsToTheOutputNeuron(netSum);
 

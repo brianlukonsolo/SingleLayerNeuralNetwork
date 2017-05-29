@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="47c259ea-ea25-4409-abf5-161574ec2b5f" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/brianlukonsolo/singlelayer_neural_network/Network/Network.java" afterPath="$PROJECT_DIR$/src/com/brianlukonsolo/singlelayer_neural_network/Network/Network.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/brianlukonsolo/singlelayer_neural_network/NeuralNetwork/NeuralNetwork.java" afterPath="$PROJECT_DIR$/src/com/brianlukonsolo/singlelayer_neural_network/NeuralNetwork/NeuralNetwork.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/brianlukonsolo/singlelayer_neural_network/NeuronTypes/HiddenNeuron.java" afterPath="$PROJECT_DIR$/src/com/brianlukonsolo/singlelayer_neural_network/NeuronTypes/HiddenNeuron.java" />
@@ -21,8 +22,8 @@
       <file leaf-file-name="NeuralNetwork.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/brianlukonsolo/singlelayer_neural_network/NeuralNetwork/NeuralNetwork.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="70" column="37" lean-forward="false" selection-start-line="70" selection-start-column="37" selection-end-line="70" selection-end-column="37" />
+            <state relative-caret-position="663">
+              <caret line="39" column="0" lean-forward="true" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -33,28 +34,40 @@
       <file leaf-file-name="Network.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/brianlukonsolo/singlelayer_neural_network/Network/Network.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="51" column="31" lean-forward="false" selection-start-line="51" selection-start-column="31" selection-end-line="51" selection-end-column="31" />
+            <state relative-caret-position="238">
+              <caret line="14" column="24" lean-forward="false" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#8731#8732#0" expanded="true" />
-                <element signature="e#8770#8771#0" expanded="true" />
-                <element signature="e#8967#8968#0" expanded="true" />
-                <element signature="e#9007#9008#0" expanded="true" />
-                <element signature="e#9209#9210#0" expanded="true" />
-                <element signature="e#9249#9250#0" expanded="true" />
-                <element signature="e#9429#9430#0" expanded="true" />
-                <element signature="e#9464#9465#0" expanded="true" />
-                <element signature="e#9520#9521#0" expanded="true" />
-                <element signature="e#9568#9569#0" expanded="true" />
-                <element signature="e#9623#9624#0" expanded="true" />
-                <element signature="e#9663#9664#0" expanded="true" />
-                <element signature="e#9853#9854#0" expanded="true" />
-                <element signature="e#9893#9894#0" expanded="true" />
-                <element signature="e#10076#10077#0" expanded="true" />
-                <element signature="e#10109#10110#0" expanded="true" />
-                <element signature="e#10168#10169#0" expanded="true" />
-                <element signature="e#10208#10209#0" expanded="true" />
+                <element signature="e#8978#8979#0" expanded="true" />
+                <element signature="e#9017#9018#0" expanded="true" />
+                <element signature="e#9214#9215#0" expanded="true" />
+                <element signature="e#9254#9255#0" expanded="true" />
+                <element signature="e#9456#9457#0" expanded="true" />
+                <element signature="e#9496#9497#0" expanded="true" />
+                <element signature="e#9676#9677#0" expanded="true" />
+                <element signature="e#9711#9712#0" expanded="true" />
+                <element signature="e#9767#9768#0" expanded="true" />
+                <element signature="e#9815#9816#0" expanded="true" />
+                <element signature="e#9870#9871#0" expanded="true" />
+                <element signature="e#9910#9911#0" expanded="true" />
+                <element signature="e#10100#10101#0" expanded="true" />
+                <element signature="e#10140#10141#0" expanded="true" />
+                <element signature="e#10323#10324#0" expanded="true" />
+                <element signature="e#10356#10357#0" expanded="true" />
+                <element signature="e#10415#10416#0" expanded="true" />
+                <element signature="e#10455#10456#0" expanded="true" />
+                <element signature="e#10509#10510#0" expanded="true" />
+                <element signature="e#10562#10563#0" expanded="true" />
+                <element signature="e#10789#10790#0" expanded="true" />
+                <element signature="e#10842#10843#0" expanded="true" />
+                <element signature="e#11057#11058#0" expanded="true" />
+                <element signature="e#11095#11096#0" expanded="true" />
+                <element signature="e#11157#11158#0" expanded="true" />
+                <element signature="e#11211#11212#0" expanded="true" />
+                <element signature="e#11258#11259#0" expanded="true" />
+                <element signature="e#11290#11291#0" expanded="true" />
+                <element signature="e#11351#11352#0" expanded="true" />
+                <element signature="e#11393#11394#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -80,8 +93,8 @@
       <file leaf-file-name="HiddenNeuron.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/brianlukonsolo/singlelayer_neural_network/NeuronTypes/HiddenNeuron.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="478">
-              <caret line="75" column="14" lean-forward="true" selection-start-line="74" selection-start-column="4" selection-end-line="78" selection-end-column="5" />
+            <state relative-caret-position="155">
+              <caret line="56" column="47" lean-forward="false" selection-start-line="56" selection-start-column="47" selection-end-line="56" selection-end-column="47" />
               <folding>
                 <element signature="e#3583#3584#0" expanded="true" />
                 <element signature="e#3621#3622#0" expanded="true" />
@@ -103,8 +116,8 @@
       <file leaf-file-name="OutputNeuron.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/brianlukonsolo/singlelayer_neural_network/NeuronTypes/OutputNeuron.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="58" column="39" lean-forward="true" selection-start-line="58" selection-start-column="39" selection-end-line="58" selection-end-column="39" />
+            <state relative-caret-position="170">
+              <caret line="45" column="9" lean-forward="true" selection-start-line="45" selection-start-column="9" selection-end-line="45" selection-end-column="9" />
               <folding>
                 <element signature="e#2781#2782#0" expanded="true" />
                 <element signature="e#2816#2817#0" expanded="true" />
@@ -557,7 +570,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.53805494" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5422833" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -590,10 +603,46 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/com/brianlukonsolo/singlelayer_neural_network/NeuronTypes/InputNeuron.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="55" lean-forward="false" selection-start-line="8" selection-start-column="55" selection-end-line="8" selection-end-column="55" />
+          <folding>
+            <element signature="e#558#559#0" expanded="true" />
+            <element signature="e#604#605#0" expanded="true" />
+            <element signature="e#659#660#0" expanded="true" />
+            <element signature="e#692#693#0" expanded="true" />
+            <element signature="e#744#745#0" expanded="true" />
+            <element signature="e#788#789#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/brianlukonsolo/singlelayer_neural_network/NeuronTypes/HiddenNeuron.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="155">
+          <caret line="56" column="47" lean-forward="false" selection-start-line="56" selection-start-column="47" selection-end-line="56" selection-end-column="47" />
+          <folding>
+            <element signature="e#3583#3584#0" expanded="true" />
+            <element signature="e#3621#3622#0" expanded="true" />
+            <element signature="e#3694#3695#0" expanded="true" />
+            <element signature="e#3748#3749#0" expanded="true" />
+            <element signature="e#3807#3808#0" expanded="true" />
+            <element signature="e#3851#3852#0" expanded="true" />
+            <element signature="e#4042#4043#0" expanded="true" />
+            <element signature="e#4074#4075#0" expanded="true" />
+            <element signature="e#4131#4132#0" expanded="true" />
+            <element signature="e#4184#4185#0" expanded="true" />
+            <element signature="e#4417#4418#0" expanded="true" />
+            <element signature="e#4470#4471#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/brianlukonsolo/singlelayer_neural_network/NeuronTypes/OutputNeuron.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="58" column="39" lean-forward="true" selection-start-line="58" selection-start-column="39" selection-end-line="58" selection-end-column="39" />
+        <state relative-caret-position="170">
+          <caret line="45" column="9" lean-forward="true" selection-start-line="45" selection-start-column="9" selection-end-line="45" selection-end-column="9" />
           <folding>
             <element signature="e#2781#2782#0" expanded="true" />
             <element signature="e#2816#2817#0" expanded="true" />
@@ -623,74 +672,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/brianlukonsolo/singlelayer_neural_network/NeuronTypes/InputNeuron.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="55" lean-forward="false" selection-start-line="8" selection-start-column="55" selection-end-line="8" selection-end-column="55" />
-          <folding>
-            <element signature="e#558#559#0" expanded="true" />
-            <element signature="e#604#605#0" expanded="true" />
-            <element signature="e#659#660#0" expanded="true" />
-            <element signature="e#692#693#0" expanded="true" />
-            <element signature="e#744#745#0" expanded="true" />
-            <element signature="e#788#789#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/brianlukonsolo/singlelayer_neural_network/NeuronTypes/HiddenNeuron.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="478">
-          <caret line="75" column="14" lean-forward="true" selection-start-line="74" selection-start-column="4" selection-end-line="78" selection-end-column="5" />
-          <folding>
-            <element signature="e#3583#3584#0" expanded="true" />
-            <element signature="e#3621#3622#0" expanded="true" />
-            <element signature="e#3694#3695#0" expanded="true" />
-            <element signature="e#3748#3749#0" expanded="true" />
-            <element signature="e#3807#3808#0" expanded="true" />
-            <element signature="e#3851#3852#0" expanded="true" />
-            <element signature="e#4042#4043#0" expanded="true" />
-            <element signature="e#4074#4075#0" expanded="true" />
-            <element signature="e#4131#4132#0" expanded="true" />
-            <element signature="e#4184#4185#0" expanded="true" />
-            <element signature="e#4417#4418#0" expanded="true" />
-            <element signature="e#4470#4471#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/brianlukonsolo/singlelayer_neural_network/Network/Network.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="51" column="31" lean-forward="false" selection-start-line="51" selection-start-column="31" selection-end-line="51" selection-end-column="31" />
+        <state relative-caret-position="238">
+          <caret line="14" column="24" lean-forward="false" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#8731#8732#0" expanded="true" />
-            <element signature="e#8770#8771#0" expanded="true" />
-            <element signature="e#8967#8968#0" expanded="true" />
-            <element signature="e#9007#9008#0" expanded="true" />
-            <element signature="e#9209#9210#0" expanded="true" />
-            <element signature="e#9249#9250#0" expanded="true" />
-            <element signature="e#9429#9430#0" expanded="true" />
-            <element signature="e#9464#9465#0" expanded="true" />
-            <element signature="e#9520#9521#0" expanded="true" />
-            <element signature="e#9568#9569#0" expanded="true" />
-            <element signature="e#9623#9624#0" expanded="true" />
-            <element signature="e#9663#9664#0" expanded="true" />
-            <element signature="e#9853#9854#0" expanded="true" />
-            <element signature="e#9893#9894#0" expanded="true" />
-            <element signature="e#10076#10077#0" expanded="true" />
-            <element signature="e#10109#10110#0" expanded="true" />
-            <element signature="e#10168#10169#0" expanded="true" />
-            <element signature="e#10208#10209#0" expanded="true" />
+            <element signature="e#8978#8979#0" expanded="true" />
+            <element signature="e#9017#9018#0" expanded="true" />
+            <element signature="e#9214#9215#0" expanded="true" />
+            <element signature="e#9254#9255#0" expanded="true" />
+            <element signature="e#9456#9457#0" expanded="true" />
+            <element signature="e#9496#9497#0" expanded="true" />
+            <element signature="e#9676#9677#0" expanded="true" />
+            <element signature="e#9711#9712#0" expanded="true" />
+            <element signature="e#9767#9768#0" expanded="true" />
+            <element signature="e#9815#9816#0" expanded="true" />
+            <element signature="e#9870#9871#0" expanded="true" />
+            <element signature="e#9910#9911#0" expanded="true" />
+            <element signature="e#10100#10101#0" expanded="true" />
+            <element signature="e#10140#10141#0" expanded="true" />
+            <element signature="e#10323#10324#0" expanded="true" />
+            <element signature="e#10356#10357#0" expanded="true" />
+            <element signature="e#10415#10416#0" expanded="true" />
+            <element signature="e#10455#10456#0" expanded="true" />
+            <element signature="e#10509#10510#0" expanded="true" />
+            <element signature="e#10562#10563#0" expanded="true" />
+            <element signature="e#10789#10790#0" expanded="true" />
+            <element signature="e#10842#10843#0" expanded="true" />
+            <element signature="e#11057#11058#0" expanded="true" />
+            <element signature="e#11095#11096#0" expanded="true" />
+            <element signature="e#11157#11158#0" expanded="true" />
+            <element signature="e#11211#11212#0" expanded="true" />
+            <element signature="e#11258#11259#0" expanded="true" />
+            <element signature="e#11290#11291#0" expanded="true" />
+            <element signature="e#11351#11352#0" expanded="true" />
+            <element signature="e#11393#11394#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/brianlukonsolo/singlelayer_neural_network/NeuralNetwork/NeuralNetwork.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="70" column="37" lean-forward="false" selection-start-line="70" selection-start-column="37" selection-end-line="70" selection-end-column="37" />
+        <state relative-caret-position="663">
+          <caret line="39" column="0" lean-forward="true" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
