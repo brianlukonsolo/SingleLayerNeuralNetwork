@@ -54,6 +54,7 @@ public class HiddenNeuron {
             System.out.println("[ HiddenNeuron Sum function ]>>> MULTIPLYING: " + d + " and " + weightsOfInputs.get(inputsLayerValuesList.indexOf(d)));
             //Add to the total
         }
+        System.out.println("[ HiddenNeuron Sigmoid function ]>>> Net sum is : " + netSum);
         //Store the value for later use
         setNetSumOfInputToTheHiddenNeuron(netSum);
 
@@ -69,6 +70,12 @@ public class HiddenNeuron {
         //Store the value for later use
         setSigmoidOutputOfTheHiddenNeuron(outputValue);
         return outputValue;
+    }
+
+    //Fires the neuron and produces an output
+    public double fire(){
+        double sigmoidOutput = calculateSigmoidOutput(calculateNetSum());
+        return sigmoidOutput;
     }
 
     //Get and Set

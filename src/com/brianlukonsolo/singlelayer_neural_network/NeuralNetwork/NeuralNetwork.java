@@ -30,6 +30,8 @@ public class NeuralNetwork {
       for(InputNeuron inputNeuron: input_layer){
           inputsForHiddenNeurons.add(inputNeuron.getInputValue());
       }
+
+      /*
       //add two hidden neurons to the hidden layer----------------------------------------HIDDEN NEURON LAYER
       ArrayList<HiddenNeuron> hidden_layer = new ArrayList<>();
       hidden_layer.add(new HiddenNeuron(inputsForHiddenNeurons, 0.35));
@@ -76,16 +78,20 @@ public class NeuralNetwork {
       out2.setWeightsOfOutputsFromHiddenLayer(new ArrayList(Arrays.asList(0.50, 0.55)));
       double ns2 = out2.calculateNetSum();
       double finalOut2 = out2.calculateSigmoidOutput(ns2);
-
+*/
 
       //Instatiate the full network and pass it the input neurons arrayList as inputs
-      Network neuralNetwork = new Network(input_layer, hidden_layer, output_layer);
-      //Run the network
-      neuralNetwork.startLearning();
+      Network neuralNetwork = new Network(inputsForHiddenNeurons);
 
-      for(InputNeuron d: neuralNetwork.getInputNeuronsList()) {
-          System.out.println("Network input: " + d.getInputValue());
-      }
+      System.out.println("----------------------------ABOUT TO FOWARD-PROPAGATE------------------------------------");
+      //Forward pass
+      neuralNetwork.fowardPropagate();
+
+      //neuralNetwork.startLearning(inputsForHiddenNeurons);
+
+     // for(InputNeuron d: neuralNetwork.getInputNeuronsList()) {
+     //     System.out.println("Network input: " + d.getInputValue());
+     // }
 
 
   }
