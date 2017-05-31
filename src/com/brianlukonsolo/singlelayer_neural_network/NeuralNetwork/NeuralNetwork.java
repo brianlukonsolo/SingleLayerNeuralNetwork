@@ -1,9 +1,7 @@
 package com.brianlukonsolo.singlelayer_neural_network.NeuralNetwork;
 
 import com.brianlukonsolo.singlelayer_neural_network.Network.Network;
-import com.brianlukonsolo.singlelayer_neural_network.NeuronTypes.HiddenNeuron;
 import com.brianlukonsolo.singlelayer_neural_network.NeuronTypes.InputNeuron;
-import com.brianlukonsolo.singlelayer_neural_network.NeuronTypes.OutputNeuron;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,6 +37,7 @@ public class NeuralNetwork {
       neuralNetwork.fowardPropagate();
 
       //TODO: neuralNetwork.backpropagate
+      neuralNetwork.backpropagate();
 
       //TODO: neuralNetwork.updateAllWeights
 

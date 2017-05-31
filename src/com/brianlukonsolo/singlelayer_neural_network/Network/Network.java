@@ -128,14 +128,14 @@ public class Network {
         }
         System.out.println(" END OF OUTPUT LAYER CREATION ");
         //add two output neurons to the output layer----------------------------------------OUTPUT NEURON LAYER
-        OutputNeuron out1 = new OutputNeuron(inputsForOutputNeurons, 0.60);
+        OutputNeuron out1 = new OutputNeuron(inputsForOutputNeurons, 0.60, 0.01);
         out1.setWeightsOfOutputsFromHiddenLayer(new ArrayList<>(Arrays.asList(0.40, 0.45)));
         //add to the output layer and fire
         output_layer.add(out1);
         double ns1 = out1.calculateNetSum();
         double finalOut = out1.calculateSigmoidOutput(ns1);
 
-        OutputNeuron out2 = new OutputNeuron(inputsForOutputNeurons, 0.60);
+        OutputNeuron out2 = new OutputNeuron(inputsForOutputNeurons, 0.60, 0.99);
         out2.setWeightsOfOutputsFromHiddenLayer(new ArrayList(Arrays.asList(0.50, 0.55)));
         //Add to the utput layyer and fire
         output_layer.add(out2);
@@ -156,7 +156,13 @@ public class Network {
 
         setOutputNeuronsList(output_layer);
 
-       //Set list of outputs. These will be used by the forward-propagation
+        //Finally, set the target-outputs and actual outputs list
+        //It contains a list of target outputs, each coressponding to an output neuron
+        for(OutputNeuron o: getOutputNeuronsList()){
+            targetOutputsList.add(o.getTargetOutput());
+        }
+
+       //Set list of actual outputs. These will be used by the forward-propagation
         actualOutputsList.add(finalOut);
         actualOutputsList.add(finalOut2);
     }
@@ -173,8 +179,11 @@ public class Network {
         }
         //Output layer calculations
         for(OutputNeuron outputNeuron: getOutputNeuronsList()){
-            //Fire the output neurons and store the outputs
-            outputs.add(outputNeuron.fire());
+            //Fire the output neurons and store the outputs of each within the neuron
+            double output = outputNeuron.fire();
+            outputs.add(output);
+            //Store the output in the neuron for later use in the backpropagation algorithm
+            outputNeuron.setActualOutput(output);
             System.out.println("OUTPUT NEURON >>>>>>>>>>>>>>>>>>>> Output Neuron fired!!\n");
         }
 
@@ -183,11 +192,59 @@ public class Network {
             System.out.println("FORWARD PROPAGATION OUTPUTS: " + d);
         }
         System.out.println("#################################-END-###########################################");
-        return inputs_for_the_network;
+
+        //Set the outputs list to the new actual-outputs of the output neurons
+        actualOutputsList = outputs;
+
+        return outputs;
     }
 
+    //An implementation of the Backpropagation algorithm based on the calculation of partial derivatives
     public void backpropagate(){
         //TODO: Implement backpropagation algorithm for the network
+        //Storage for the updated weights after backpropagation
+        ArrayList<Double> newWeightsOfInputs = new ArrayList();
+        ArrayList<Double> newWeightsOfOutputsFromHiddenLayer = new ArrayList();
+
+        //OutputErrorList
+
+        //Calculate the total output error
+        //Note: function also sets the individual output error in the neuron which can be accessed using the [ getOutputError ] getter method
+        double totalNetworkOutputError = calculateOutputErrorForEachOutputNeuron(outputNeuronsList);
+
+        //Calculate the partial derivatives of the synapses located right before the output layer
+        for(OutputNeuron outputNeuron: getOutputNeuronsList()){
+            //Take the partial derivative of the total output error with respect to the currently selected weight
+            
+            //First, we take the derivative of
+
+        }
+
+    }
+
+    //This method calculates the individual output error of each neuron and then sums all of them to get the total output error
+    public double calculateOutputErrorForEachOutputNeuron(ArrayList<OutputNeuron> output_neurons_list){
+        //clear the error list and update with new values
+        errorList.clear();
+
+        double totalOutputError = 0;
+
+        for(OutputNeuron outputNeuron: output_neurons_list){
+            //Reminder: This outputs correctly. Do not modify.
+            double target = getTargetOutputsList().get(output_neurons_list.indexOf(outputNeuron));
+            double output = outputNeuron.getActualOutput();
+            System.out.println(">>> T - O = " + (target-output));
+            //Squared error equation is = 1/2(target - output^2)
+            //We use 1.0/2.0 to represent 1/2 because we are dealing with doubles
+            double error = ((1.0/2.0) * Math.pow((target - output),2));
+            System.out.println("NEURON ERROR = " + error);
+            //Let the neuron know its error
+            outputNeuron.setOutputError(error);
+            //Add to the total error
+            totalOutputError = totalOutputError + error;
+        }
+        System.out.println("Total output error is : " + totalOutputError);
+        return totalOutputError;
     }
 
     //Get and Set

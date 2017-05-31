@@ -28,9 +28,10 @@ public class OutputNeuron {
 
 
     //Constructor
-    public OutputNeuron(ArrayList<Double> outputs_of_hidden_layer_list, double bias_neuron_value){
+    public OutputNeuron(ArrayList<Double> outputs_of_hidden_layer_list, double bias_neuron_value, double target_output){
         this.setHiddenLayerOutputValuesList(outputs_of_hidden_layer_list);
         this.setBias(bias_neuron_value);
+        this.setTargetOutput(target_output);
     }
 
     //Methods
