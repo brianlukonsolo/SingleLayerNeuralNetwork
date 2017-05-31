@@ -206,19 +206,42 @@ public class Network {
         ArrayList<Double> newWeightsOfInputs = new ArrayList();
         ArrayList<Double> newWeightsOfOutputsFromHiddenLayer = new ArrayList();
 
-        //OutputErrorList
-
         //Calculate the total output error
         //Note: function also sets the individual output error in the neuron which can be accessed using the [ getOutputError ] getter method
         double totalNetworkOutputError = calculateOutputErrorForEachOutputNeuron(outputNeuronsList);
 
-        //Calculate the partial derivatives of the synapses located right before the output layer
+        //Firstly:
+        //Take the partial derivative of the total output error with respect to the output
+        // Derivative of the TotalError with respect to the Output multiplied by derivative of the Output with respect to the net sum input of the output neuron
+        // Once we have these in a table, we only need to multiply each by the partial derivative of the net input with respect to the appropriate weight connected to the neuron
+        //
+        //The partial derivative of the total error with respect to a weight:
+        //dTotalError/dWeighti = dTotalError/dOuti * dOuti/dNeti * dNeti/dWeighti
+        //
+        //In the for loop below we calculate the first two because they do not change throughout the backpropagation (dTotalError/dOuti * dOuti/dNeti)
+        ArrayList<Double> totalErrorChange_WRT_Output_List_X_net_List = new ArrayList();
         for(OutputNeuron outputNeuron: getOutputNeuronsList()){
-            //Take the partial derivative of the total output error with respect to the currently selected weight
-            
-            //First, we take the derivative of
+            //vars
+            double targetOut = outputNeuron.getTargetOutput();
+            double actualOut = outputNeuron.getActualOutput();
+            //Partial derivative of the total error with respect to the output
+            double partialDerivative_O = -(targetOut - actualOut);
+            //Partial derivative of the output with respect to the net input
+            double partialDerivative_N = (actualOut * (1 - actualOut));
+            //We store this because its values will be used in calculations of all the weights and the values will be constant for this part
+            double ans = (partialDerivative_O * partialDerivative_N);
+            totalErrorChange_WRT_Output_List_X_net_List.add(ans);
 
+            System.out.println(">>> THE CHANGE WITH RESPECT TO THE OUTPUT for this output is: " + partialDerivative_O);
+            System.out.println(">>> THE CHANGE WITH RESPECT TO THE OUTPUT for this net input is: " + partialDerivative_N);
         }
+
+        //now for each appropriate weight we can now calculate dNeti/dWeighti and complete the equation for each weight
+        
+
+        //For each weight, calculate the updated weight
+
+        //more to do ...
 
     }
 
