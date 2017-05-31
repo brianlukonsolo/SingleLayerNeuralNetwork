@@ -4,6 +4,7 @@ import com.brianlukonsolo.singlelayer_neural_network.NeuronTypes.HiddenNeuron;
 import com.brianlukonsolo.singlelayer_neural_network.NeuronTypes.InputNeuron;
 import com.brianlukonsolo.singlelayer_neural_network.NeuronTypes.OutputNeuron;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -13,7 +14,7 @@ import java.util.Random;
  */
 public class Network {
     //Initialise default learning-rate
-    private double learningRate = 0.01;
+    private double learningRate = 0.5;
     private  double biasNeuronValue = 0.35;
     private int NUMBER_OF_HIDDEN_LAYER_NEURONS = 2; //TODO: Set this somehow in the main function
     private int NUMBER_OF_OUTPUT_LAYER_NEURONS = 2;
@@ -127,16 +128,27 @@ public class Network {
             inputsForOutputNeurons.add(hiddenNeuron.getSigmoidOutputOfTheHiddenNeuron());
         }
         System.out.println(" END OF OUTPUT LAYER CREATION ");
+
+        //TODO: The full list of weights MUST BE PROVIDED!!!!!!!!!!!!!!!!!!!
+        //TODO: Refactor work: remove the responsibility of knowing the weights from the neurons, now that you have a
+        //TODO: (continued ) working for look capable of multiplying the derivatives correctly.
+
+        //TEMPORARY LIST OF WEIGHTS:
+        ArrayList<Double> allWeightsBetweenHiddenAndOutputLayer = new ArrayList<>(Arrays.asList(0.4,0.45,0.50,0.55));
+
         //add two output neurons to the output layer----------------------------------------OUTPUT NEURON LAYER
         OutputNeuron out1 = new OutputNeuron(inputsForOutputNeurons, 0.60, 0.01);
-        out1.setWeightsOfOutputsFromHiddenLayer(new ArrayList<>(Arrays.asList(0.40, 0.45)));
+        //give neuron the list of weights
+        out1.setWeightsOfOutputsFromHiddenLayer(allWeightsBetweenHiddenAndOutputLayer);
         //add to the output layer and fire
         output_layer.add(out1);
         double ns1 = out1.calculateNetSum();
         double finalOut = out1.calculateSigmoidOutput(ns1);
 
+
         OutputNeuron out2 = new OutputNeuron(inputsForOutputNeurons, 0.60, 0.99);
-        out2.setWeightsOfOutputsFromHiddenLayer(new ArrayList(Arrays.asList(0.50, 0.55)));
+        //give neuron the list of weights
+        out2.setWeightsOfOutputsFromHiddenLayer(allWeightsBetweenHiddenAndOutputLayer);
         //Add to the utput layyer and fire
         output_layer.add(out2);
         double ns2 = out2.calculateNetSum();
@@ -199,6 +211,7 @@ public class Network {
         return outputs;
     }
 
+    //TODO: UNDER CONSTRUCTION===============================================================================================####
     //An implementation of the Backpropagation algorithm based on the calculation of partial derivatives
     public void backpropagate(){
         //TODO: Implement backpropagation algorithm for the network
@@ -237,13 +250,44 @@ public class Network {
         }
 
         //now for each appropriate weight we can now calculate dNeti/dWeighti and complete the equation for each weight
-        
+
+
+        ///-----------Pseudocode--------------------
+        //Each output neuron has a list of all the weights connecting the output layer to the hidden layer
+        ArrayList<Double> weightsBetweenOutputAndHiddenLayers_List = outputNeuronsList.get(0).getWeightsOfOutputsFromHiddenLayer();
+        ArrayList<Double> hiddenLayerOutputs_List = outputNeuronsList.get(0).getHiddenLayerOutputValuesList();
+
+        //For each weight, I multiply by the output of the hidden neurons, incrementing the index of the hidden neuron whos output im multiplying by
+        //The increment must go up to the number of neurons in the hidden layer and must restart from neuron 1 once the index reaches the total number of hidden neurons.
+        int indexOfHiddenNeuronToMultiplyBy = 0; //this is the first hidden neuron
+        int totalNumberOfNiddenNeurons = hiddenNeuronsList.size();
+
+        for(double weight: weightsBetweenOutputAndHiddenLayers_List){
+            //Reset if greater than total number of hidden neurons
+            if(indexOfHiddenNeuronToMultiplyBy >= totalNumberOfNiddenNeurons){
+                indexOfHiddenNeuronToMultiplyBy = 0;
+            }
+
+            //Completing the equation for each weight ---> dTotalError/dWeighti = dTotalError/dOuti * dOuti/dNeti * dNeti/dWeighti
+            double fullWeightError = totalErrorChange_WRT_Output_List_X_net_List.get(indexOfHiddenNeuronToMultiplyBy) * hiddenLayerOutputs_List.get(indexOfHiddenNeuronToMultiplyBy);
+            double updatedWeight = weight - (learningRate * fullWeightError);
+
+            System.out.println("THE UPDATED WEIGHT FOR WEIGHT: " + weight + " ====> " + updatedWeight);
+
+            //increment up to the total number of hidden neurons each time and reset when limit reached
+            indexOfHiddenNeuronToMultiplyBy = indexOfHiddenNeuronToMultiplyBy + 1;
+        }
+
+
+
+        ///-----------------------------------------
 
         //For each weight, calculate the updated weight
 
         //more to do ...
 
     }
+    //TODO: END OF - UNDER CONSTRUCTION===============================================================================================####
 
     //This method calculates the individual output error of each neuron and then sums all of them to get the total output error
     public double calculateOutputErrorForEachOutputNeuron(ArrayList<OutputNeuron> output_neurons_list){
