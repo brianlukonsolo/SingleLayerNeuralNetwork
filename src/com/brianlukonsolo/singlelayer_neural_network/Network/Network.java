@@ -65,6 +65,14 @@ public class Network {
         Random random = new Random();
         random.setSeed(System.currentTimeMillis());
 
+        //TODO: The full list of weights MUST BE PROVIDED!!!!!!!!!!!!!!!!!!!
+        //TODO: Refactor work: remove the responsibility of knowing the weights from the neurons, now that you have a
+        //TODO: (continued ) working for look capable of multiplying the derivatives correctly.
+
+        //TEMPORARY LISTS OF WEIGHTS:
+        ArrayList<Double> allWeightsBetweenInputAndHiddenLayer = new ArrayList<>(Arrays.asList(0.15,0.20,0.25,0.30));
+        ArrayList<Double> allWeightsBetweenHiddenAndOutputLayer = new ArrayList<>(Arrays.asList(0.4,0.45,0.50,0.55));
+
         //Create input layer
         //For each input, create an input object in the input layer
         ArrayList<InputNeuron> input_layer = new ArrayList<>();
@@ -77,9 +85,8 @@ public class Network {
             inputValuesListForNetwork.add(d);
         } */
 
-       ArrayList<Double> weightsOfInputs = new ArrayList<>();
-       weightsOfInputs.add(0.15);
-       weightsOfInputs.add(0.20);
+       //
+       ArrayList<Double> weightsOfInputs = allWeightsBetweenInputAndHiddenLayer;
        //TODO: UNCOMMENT FOR LOOP AND DELETE ABOVE WEIGHT LIST
        //Create arraylist holding random weights for the inputs
         /*ArrayList<Double> weightsOfInputs = new ArrayList<>();
@@ -98,13 +105,13 @@ public class Network {
         ArrayList<HiddenNeuron> hidden_layer = new ArrayList<>();
         //hidden neuron 1
         hidden_layer.add(new HiddenNeuron(inputs_for_the_network, 0.35));
-        hidden_layer.get(0).setWeightsOfInputs(new ArrayList<Double>(Arrays.asList(0.15,0.20)));
+        hidden_layer.get(0).setWeightsOfInputs(allWeightsBetweenInputAndHiddenLayer);
         //Fire the neuron once or network will fail
         hidden_layer.get(0).calculateSigmoidOutput(hidden_layer.get(0).calculateNetSum());
 
         //hidden neuron 1
         hidden_layer.add(new HiddenNeuron(inputs_for_the_network, 0.35));
-        hidden_layer.get(1).setWeightsOfInputs(new ArrayList<Double>(Arrays.asList(0.25,0.30)));
+        hidden_layer.get(1).setWeightsOfInputs(allWeightsBetweenInputAndHiddenLayer);
         //Fire the neuron once or network will fail
         hidden_layer.get(1).calculateSigmoidOutput(hidden_layer.get(1).calculateNetSum());
         //TODO: UNCOMMENT FOR LOOP AND DELETE THE ABOVE NEURONS
@@ -129,12 +136,6 @@ public class Network {
         }
         System.out.println(" END OF OUTPUT LAYER CREATION ");
 
-        //TODO: The full list of weights MUST BE PROVIDED!!!!!!!!!!!!!!!!!!!
-        //TODO: Refactor work: remove the responsibility of knowing the weights from the neurons, now that you have a
-        //TODO: (continued ) working for look capable of multiplying the derivatives correctly.
-
-        //TEMPORARY LIST OF WEIGHTS:
-        ArrayList<Double> allWeightsBetweenHiddenAndOutputLayer = new ArrayList<>(Arrays.asList(0.4,0.45,0.50,0.55));
 
         //add two output neurons to the output layer----------------------------------------OUTPUT NEURON LAYER
         OutputNeuron out1 = new OutputNeuron(inputsForOutputNeurons, 0.60, 0.01);
@@ -216,8 +217,8 @@ public class Network {
     public void backpropagate(){
         //TODO: Implement backpropagation algorithm for the network
         //Storage for the updated weights after backpropagation
-        ArrayList<Double> newWeightsOfInputs = new ArrayList();
-        ArrayList<Double> newWeightsOfOutputsFromHiddenLayer = new ArrayList();
+        ArrayList<Double> updatedWeights_InputsToHiddenLayer = new ArrayList();
+        ArrayList<Double> updatedWeights_HiddenLayerToOutputs = new ArrayList();
 
         //Calculate the total output error
         //Note: function also sets the individual output error in the neuron which can be accessed using the [ getOutputError ] getter method
@@ -251,17 +252,17 @@ public class Network {
 
         //now for each appropriate weight we can now calculate dNeti/dWeighti and complete the equation for each weight
 
-
-        ///-----------Pseudocode--------------------
         //Each output neuron has a list of all the weights connecting the output layer to the hidden layer
         ArrayList<Double> weightsBetweenOutputAndHiddenLayers_List = outputNeuronsList.get(0).getWeightsOfOutputsFromHiddenLayer();
         ArrayList<Double> hiddenLayerOutputs_List = outputNeuronsList.get(0).getHiddenLayerOutputValuesList();
-
         //For each weight, I multiply by the output of the hidden neurons, incrementing the index of the hidden neuron whos output im multiplying by
         //The increment must go up to the number of neurons in the hidden layer and must restart from neuron 1 once the index reaches the total number of hidden neurons.
         int indexOfHiddenNeuronToMultiplyBy = 0; //this is the first hidden neuron
         int totalNumberOfNiddenNeurons = hiddenNeuronsList.size();
 
+        //---------------------------------------------------------------------------------------------------------#
+        //This will calculate the updated weights for the connections between the hidden layer and the output layer
+        //---------------------------------------------------------------------------------------------------------#
         for(double weight: weightsBetweenOutputAndHiddenLayers_List){
             //Reset if greater than total number of hidden neurons
             if(indexOfHiddenNeuronToMultiplyBy >= totalNumberOfNiddenNeurons){
@@ -272,6 +273,9 @@ public class Network {
             double fullWeightError = totalErrorChange_WRT_Output_List_X_net_List.get(indexOfHiddenNeuronToMultiplyBy) * hiddenLayerOutputs_List.get(indexOfHiddenNeuronToMultiplyBy);
             double updatedWeight = weight - (learningRate * fullWeightError);
 
+            //Store the updated weights
+            updatedWeights_HiddenLayerToOutputs.add(updatedWeight);
+
             System.out.println("THE UPDATED WEIGHT FOR WEIGHT: " + weight + " ====> " + updatedWeight);
 
             //increment up to the total number of hidden neurons each time and reset when limit reached
@@ -279,12 +283,49 @@ public class Network {
         }
 
 
+        //Each output neuron has a list of all the weights connecting the output layer to the hidden layer
+        ArrayList<Double> weightsBetweenInputAndHiddenLayers_List = hiddenNeuronsList.get(0).getWeightsOfInputs();
 
-        ///-----------------------------------------
+        int indexOfInputToMultiplyBy = 0;
+        int totalNumberOfInputs = inputsList.size();
 
-        //For each weight, calculate the updated weight
+        int count = 0;
+        int indexOfOutputLayerWeightToMultiplyBy = 0;
 
-        //more to do ...
+        //---------------------------------------------------------------------------------------------------------#
+        //This will calculate the updated weights for the connections between the hidden layer and the output layer
+        //---------------------------------------------------------------------------------------------------------#
+
+        for(double inputWeight: weightsBetweenInputAndHiddenLayers_List){
+            //Reset if greater than total number of inputs
+            if(indexOfInputToMultiplyBy >= totalNumberOfInputs){
+                indexOfInputToMultiplyBy = 0;
+            }
+
+            //Completing the equation and taking into account that multiple outputs are affected by weights in this area/layer zone (do the derivatives calculations on paper again to see)
+            double fullWeightError = totalErrorChange_WRT_Output_List_X_net_List.get(indexOfInputToMultiplyBy) * inputsList.get(indexOfInputToMultiplyBy);
+System.out.println("###### INPUT INDEX - " + indexOfInputToMultiplyBy);
+System.out.println("###### WEIGHT IS - " + inputWeight);
+
+            //TODO: FIGURE OUT AN ALGORITHM TO MULTIPLY BY THE RIGHT WEIGHT TO COMPLETE THE EQUATION
+
+            //TODO: ======== YOU ARE HERE ==============================================================================================####
+                //Logic relies on number of output neurons
+                if(count == getOutputNeuronsList().size()){
+                    //add a value that is equal to the number of outputs
+                    indexOfOutputLayerWeightToMultiplyBy = indexOfOutputLayerWeightToMultiplyBy + getOutputNeuronsList().size();
+                    System.out.println("\n--------------- SWITCHING MULTIPLIER:::::: " + weightsBetweenOutputAndHiddenLayers_List.get(indexOfOutputLayerWeightToMultiplyBy));
+                }
+                System.out.println("\nxxxxxxxxxxxxxxx Multiply by weight :::::: " + weightsBetweenOutputAndHiddenLayers_List.get(indexOfOutputLayerWeightToMultiplyBy));
+                //LOGIC HERE
+            //TODO: END OF - YOU ARE HERE ==============================================================================================####
+
+            count = count + 1; //used to pick the correct weight to use in the derivative calulation based on connections to the neuron
+            indexOfInputToMultiplyBy = indexOfInputToMultiplyBy + 1;
+        }
+
+        //Finally update ALL the weights in the network
+        //TODO: Finally, update all the weights in the network!! (dont forget to give the neurons the updated weights if still giving them this responsibility of knowing the full list)
 
     }
     //TODO: END OF - UNDER CONSTRUCTION===============================================================================================####
