@@ -285,13 +285,9 @@ public class Network {
 
         //Each output neuron has a list of all the weights connecting the output layer to the hidden layer
         ArrayList<Double> weightsBetweenInputAndHiddenLayers_List = hiddenNeuronsList.get(0).getWeightsOfInputs();
-
         int indexOfInputToMultiplyBy = 0;
         int totalNumberOfInputs = inputsList.size();
-
-        int count = 0;
         int indexOfOutputLayerWeightToMultiplyBy = 0;
-
         //This makes sure that we multiply by the correct hidden-output weights even if we increase the number of hidden layer neurons
         int numberOfHiddenNeurons = hiddenNeuronsList.size();
         int indexOfWeightToMultiplyByForDerivative = 0;
@@ -310,43 +306,72 @@ public class Network {
         int numberOfOutputLayerNeurons = getOutputNeuronsList().size();
         int inputWeightIndex = 0;
         System.out.println("####[[[ Number of inputs: " + numberOfInputs + " ]]]####");
-        System.out.println("####[[[ Number of hidden neurons: " + numberOfHiddenLayerNeurons + " ]]]####");
-        System.out.println("####[[[ Number of output neurons: " + numberOfOutputLayerNeurons + " ]]]####");
         int indexShift = 1;
 
-        for (double weight : weightsBetweenInputAndHiddenLayers_List) {
-            //If we reach the number of inputs we need to move the indexShift + 1
-            if ((inputWeightIndex - numberOfInputs) == 0) {
-                indexShift = indexShift + 1;
-                System.out.println("=======================HERE=====================index shift is " + indexShift);
+        //int count = 0;
+        //int increment = 0;
+
+        //For each weight between the input and hidden layer, I want to find the hidden neurons associated with that weight
+        //InputLayer
+        /*for (double weight : weightsBetweenInputAndHiddenLayers_List) {
+            inputWeightIndex = inputWeightIndex + 1;
+            //HiddenLayer
+            for(int i = 0; i<numberOfHiddenLayerNeurons ; i++){//HiddenNeuron hiddenNeuron: getHiddenNeuronsList()){
+                System.out.println("\nHIDDEN NEURON -=====================================================#### " + getHiddenNeuronsList().indexOf(i));
+                System.out.println("Count is : " + count);
+                //If the current hidden neuron index == the number of input neurons
+
+                if(increment >= weightsBetweenInputAndHiddenLayers_List.size()){
+                    increment = 0;
+                }
+                System.out.println("WEIGHT: " + weightsBetweenInputAndHiddenLayers_List.get(count));
+
+                count = count + 1;
+                if(count >= (weightsBetweenInputAndHiddenLayers_List.size())){
+                    System.out.println("----COUNT LIMIT>>>>>>>>>>>>>--" + count);
+                    count = 0;
+                    break;
+                }
             }
 
-            if(weightsBetweenInputAndHiddenLayers_List.indexOf(weight) == numberOfHiddenLayerNeurons){
-                //Track the index of the input weight
-                inputWeightIndex = inputWeightIndex + 1;
-            }
-
-            System.out.println("Current weight: ---> [ " + weight + " ]===========================================#################################################################");
-            System.out.println("Current index: ---> [ " + inputWeightIndex + " ]");
+        }*/
 
 
-                //System.out.println("    >>  Neuron index = " + getHiddenNeuronsList().indexOf(hiddenNeuron));
-                System.out.println("------------------------------> Index shift = " + indexShift);
+        int c = 0;
+        int shift = 0;
 
-                //Increment the index shift amount
-                System.out.println("Inputweight index: ---> [ " + inputWeightIndex + " ]");
-                System.out.println("### Secondary Index >>> " + (inputWeightIndex + (numberOfOutputLayerNeurons - 1)));
-                System.out.println("                        WEIGHTS TO MULTIPLY BY::::: " + weightsBetweenOutputAndHiddenLayers_List.get(inputWeightIndex) + " "
-                        + weightsBetweenOutputAndHiddenLayers_List.get((inputWeightIndex + (numberOfOutputLayerNeurons))));
-
-                //For each output neuron, calculate the error derivative
-                for (OutputNeuron outputNeuron : getOutputNeuronsList()) {
-                    System.out.println("                Output index: " + getOutputNeuronsList().indexOf(outputNeuron) + "");
-                    //indexMonitor = indexMonitor + 1;
+        //for (HiddenNeuron hiddenNeuron : getHiddenNeuronsList()) {
+        for (int i = 0; i < numberOfInputs; i++) {
+            System.out.println("NEXT INPUT [ [ [----start index =--] ] ]");
+            //For each weight
+            for (int w = 0; w < weightsBetweenInputAndHiddenLayers_List.size(); w++) {
+                if (shift > numberOfInputs) {
+                    shift = 1;
                 }
 
+                if (c >= numberOfInputs) {
+                    c = 0;
+                }
+                //Loop to print to terminal
+                int counter = 0;
+                for (int l = 0; l < numberOfInputs; l++) {
+                    System.out.println("Weight needed >> " + weightsBetweenInputAndHiddenLayers_List.get(c + shift + counter));
+                    counter += numberOfInputs;
+                }
 
+                //increment according to number of inputs
+                //This stops unnecessary looping because of the difference between the number of weights and the number of inputs
+                w = (w + numberOfInputs) * numberOfInputs;
+
+                System.out.println("        ENDPART >> C is = " + c);
+            }
+
+            shift = shift + 1;
         }
+
+
+        //}
+
 
         //Finally update ALL the weights in the network
         //TODO: Finally, update all the weights in the network!! (dont forget to give the neurons the updated weights if still giving them this responsibility of knowing the full list)
