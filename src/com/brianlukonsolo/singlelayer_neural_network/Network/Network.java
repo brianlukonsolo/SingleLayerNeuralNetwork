@@ -304,39 +304,9 @@ public class Network {
         int numberOfInputs = getInputsList().size();
         int numberOfHiddenLayerNeurons = getHiddenNeuronsList().size();
         int numberOfOutputLayerNeurons = getOutputNeuronsList().size();
-        int inputWeightIndex = 0;
         System.out.println("####[[[ Number of inputs: " + numberOfInputs + " ]]]####");
-        int indexShift = 1;
 
-        //int count = 0;
-        //int increment = 0;
-
-        //For each weight between the input and hidden layer, I want to find the hidden neurons associated with that weight
-        //InputLayer
-        /*for (double weight : weightsBetweenInputAndHiddenLayers_List) {
-            inputWeightIndex = inputWeightIndex + 1;
-            //HiddenLayer
-            for(int i = 0; i<numberOfHiddenLayerNeurons ; i++){//HiddenNeuron hiddenNeuron: getHiddenNeuronsList()){
-                System.out.println("\nHIDDEN NEURON -=====================================================#### " + getHiddenNeuronsList().indexOf(i));
-                System.out.println("Count is : " + count);
-                //If the current hidden neuron index == the number of input neurons
-
-                if(increment >= weightsBetweenInputAndHiddenLayers_List.size()){
-                    increment = 0;
-                }
-                System.out.println("WEIGHT: " + weightsBetweenInputAndHiddenLayers_List.get(count));
-
-                count = count + 1;
-                if(count >= (weightsBetweenInputAndHiddenLayers_List.size())){
-                    System.out.println("----COUNT LIMIT>>>>>>>>>>>>>--" + count);
-                    count = 0;
-                    break;
-                }
-            }
-
-        }*/
-
-
+        //TODO:==============================================WORK IN PROGRESS============================================
         int c = 0;
         int shift = 0;
 
@@ -345,31 +315,31 @@ public class Network {
             System.out.println("NEXT INPUT [ [ [----start index =--] ] ]");
             //For each weight
             for (int w = 0; w < weightsBetweenInputAndHiddenLayers_List.size(); w++) {
-                if (shift > numberOfInputs) {
-                    shift = 1;
-                }
+                if (shift > numberOfInputs) { shift = 1;}
+                if (c >= numberOfInputs) { c = 0; }
 
-                if (c >= numberOfInputs) {
-                    c = 0;
-                }
                 //Loop to print to terminal
                 int counter = 0;
                 for (int l = 0; l < numberOfInputs; l++) {
-                    System.out.println("Weight needed >> " + weightsBetweenInputAndHiddenLayers_List.get(c + shift + counter));
+                    //Get the correct multiplier weights for each derivative
+                    System.out.println("    Weight needed from right-side: >> " + weightsBetweenOutputAndHiddenLayers_List.get(c + shift + counter));
+                    //Increment counter
                     counter += numberOfInputs;
                 }
-
                 //increment according to number of inputs
                 //This stops unnecessary looping because of the difference between the number of weights and the number of inputs
                 w = (w + numberOfInputs) * numberOfInputs;
-
-                System.out.println("        ENDPART >> C is = " + c);
             }
 
+            //Find left-side (between input and hidden layer) weights related to this input
+            for(int t = 0; t < (weightsBetweenInputAndHiddenLayers_List.size()-1) ; t++){
+                System.out.println("        Related left-side weights: >>" + weightsBetweenInputAndHiddenLayers_List.get(t + shift));
+                t = t + 1;
+            }
             shift = shift + 1;
         }
 
-
+        //TODO:==============================================WORK IN PROGRESS============================================
         //}
 
 
