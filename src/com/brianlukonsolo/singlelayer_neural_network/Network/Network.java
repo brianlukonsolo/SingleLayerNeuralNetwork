@@ -297,8 +297,6 @@ public class Network {
         //---------------------------------------------------------------------------------------------------------#
         System.out.println("\n ...Weights between input and hidden layer>>>>" + weightsBetweenInputAndHiddenLayers_List + "\n");
         System.out.println("\n ...Weights between hidden and output layer>>>>" + weightsBetweenOutputAndHiddenLayers_List + "\n");
-        double outputError;
-        double totalOutputError;
 
         //For each weight between the input and hidden layer
         int numberOfInputs = getInputsList().size();
@@ -309,10 +307,16 @@ public class Network {
         //TODO:==============================================WORK IN PROGRESS============================================
         int c = 0;
         int shift = 0;
+        int shift_w = 0;
 
         //for (HiddenNeuron hiddenNeuron : getHiddenNeuronsList()) {
         for (int i = 0; i < numberOfInputs; i++) {
             System.out.println("NEXT INPUT [ [ [----start index =--] ] ]");
+
+            //The total output error with respect to the input weights
+            //This is the sum of the output errors of each output neuron
+            double totalOutputError = 0;
+
             //For each weight
             for (int w = 0; w < weightsBetweenInputAndHiddenLayers_List.size(); w++) {
                 if (shift > numberOfInputs) { shift = 1;}
@@ -320,9 +324,17 @@ public class Network {
 
                 //Loop to print to terminal
                 int counter = 0;
-                for (int l = 0; l < numberOfInputs; l++) {
+                for (int l = 0; l < numberOfOutputLayerNeurons; l++) {
                     //Get the correct multiplier weights for each derivative
                     System.out.println("    Weight needed from right-side: >> " + weightsBetweenOutputAndHiddenLayers_List.get(c + shift + counter));
+                    //Calculate the total error and store it
+                    double targetOutput = getOutputNeuronsList().get(l).getTargetOutput();
+                    double actualOutput = getOutputNeuronsList().get(l).getSigmoidOutputOfTheOutputNeuron();
+
+                    System.out.println("        Target = " + targetOutput + " Actual = " + actualOutput);
+
+                    totalOutputError = (-(targetOutput - actualOutput));
+                    System.out.println("                totalOutputError = " + totalOutputError);
                     //Increment counter
                     counter += numberOfInputs;
                 }
@@ -332,13 +344,35 @@ public class Network {
             }
 
             //Find left-side (between input and hidden layer) weights related to this input
-            for(int t = 0; t < (weightsBetweenInputAndHiddenLayers_List.size()-1) ; t++){
-                System.out.println("        Related left-side weights: >>" + weightsBetweenInputAndHiddenLayers_List.get(t + shift));
-                t = t + 1;
+            int tracker = 0;
+            for(int t = 0; t < (weightsBetweenInputAndHiddenLayers_List.size()) ; t++){
+                double weightLS = weightsBetweenInputAndHiddenLayers_List.get(t + shift_w);
+                System.out.println("        Related left-side weights: >>" + weightLS);
+                //Calculate the updated weights for each weight
+                //Since we assume the number of inputs, hidden neurons and outputs are equal, we can use the index from the input neurons (i)
+                double outputHiddenNeuron_i = getHiddenNeuronsList().get(i).getSigmoidOutputOfTheHiddenNeuron();
+                //The input is the result of differentiation
+                double appropriateInput = getInputsList().get(i);
+                System.out.println("                DERIVATIVE INPUT: " + appropriateInput);
+                double error = (totalOutputError * (outputHiddenNeuron_i * (1 - outputHiddenNeuron_i))) * appropriateInput;
+
+                double updatedWeight = (weightLS - (learningRate * error));
+
+                updatedWeights_InputsToHiddenLayer.add(updatedWeight);
+
+
+                tracker = tracker + 1;
+
+                if(tracker >= numberOfInputs){
+                    System.out.println("<><><><>EPOCH<><><><>");
+                    shift_w = shift_w + numberOfInputs;
+                    break;
+                }
             }
+
             shift = shift + 1;
         }
-
+        System.out.println(" UPDATED WEIGHTS ==> " + updatedWeights_InputsToHiddenLayer);
         //TODO:==============================================WORK IN PROGRESS============================================
         //}
 
