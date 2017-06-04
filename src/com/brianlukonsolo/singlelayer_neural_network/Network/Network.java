@@ -104,16 +104,75 @@ public class Network {
         //Create the hidden layer
         ArrayList<HiddenNeuron> hidden_layer = new ArrayList<>();
         //hidden neuron 1
-        hidden_layer.add(new HiddenNeuron(inputs_for_the_network, 0.35));
-        hidden_layer.get(0).setWeightsOfInputs(allWeightsBetweenInputAndHiddenLayer);
-        //Fire the neuron once or network will fail
-        hidden_layer.get(0).calculateSigmoidOutput(hidden_layer.get(0).calculateNetSum());
+        HiddenNeuron h1 = new HiddenNeuron(inputs_for_the_network, 0.35);
+        h1.setWeightsOfInputs(allWeightsBetweenInputAndHiddenLayer);
+        h1.setInputsLayerValuesList(getInputsList());
+        double sum_h1 = h1.calculateNetSum();
+        h1.calculateSigmoidOutput(sum_h1);
+
+        hidden_layer.add(h1);
+        //System.out.println(" ++++++ Hidden neuron 1 net sum: " + hidden_layer.get(0).getNetSumOfInputToTheHiddenNeuron());
+        //System.out.println(" ++++++ Hidden neuron 1 sigmoid out: " + hidden_layer.get(0).getSigmoidOutputOfTheHiddenNeuron());
 
         //hidden neuron 1
-        hidden_layer.add(new HiddenNeuron(inputs_for_the_network, 0.35));
-        hidden_layer.get(1).setWeightsOfInputs(allWeightsBetweenInputAndHiddenLayer);
-        //Fire the neuron once or network will fail
-        hidden_layer.get(1).calculateSigmoidOutput(hidden_layer.get(1).calculateNetSum());
+        HiddenNeuron h2 = new HiddenNeuron(inputs_for_the_network, 0.35);
+        h2.setWeightsOfInputs(weightsOfInputs);
+        h2.setInputsLayerValuesList(getInputsList());
+        double sum_h2 = h2.calculateNetSum();
+        h2.calculateSigmoidOutput(sum_h2);
+
+        hidden_layer.add(h2);
+        //System.out.println(" ++++++ Hidden neuron 2 net sum: " + hidden_layer.get(1).getNetSumOfInputToTheHiddenNeuron());
+        //System.out.println(" ++++++ Hidden neuron 2 sigmoid out: " + hidden_layer.get(1).getSigmoidOutputOfTheHiddenNeuron());
+
+        //System.out.println(" ++++++ WEIGHTS " + allWeightsBetweenHiddenAndOutputLayer);
+
+        //Create the hidden layer
+        setHiddenNeuronsList(hidden_layer);
+
+
+        //FOR EACH HIDDEN NEURON IN THE HIDDEN LAYER WE WANT TO CALCULATE THE CORRECT NET SUM
+        int weightSection = (getInputsList().size());
+
+        ArrayList<Double> net_sums_of_hidden_neurons = new ArrayList<>(); //TODO: make this dynamic
+        int shifter = 0;
+        int w = 0;
+        int inputIndex = 0;
+
+            for (int hiddenNeuronIndex = 0; hiddenNeuronIndex < getHiddenNeuronsList().size(); hiddenNeuronIndex++) {
+                System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> HIDDEN NEURON >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.");
+                //Storage to store the net sum before adding to the net sum arraylist
+                double netSum = 0;
+
+                System.out.println(" :::::::::::::::::::::::::::::::::: IN THE NEURAL NETWORK ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: ++++++");
+                for (w = (w + (shifter)); w < weightsOfInputs.size(); w++) {
+                    System.out.println("===========Now processing hidden neuron " + w);
+                    //System.out.println("------STARTING-------]]]]]>>> shifter_is: " + shifter );
+                    //Calculate the net sum of the neuron
+                    System.out.println("INPUT VALUE AT THIS POINT = " + getInputsList().get(inputIndex));
+                    //netSum = netSum + (getInputsList().get(w) * weightsOfInputs.get(w));
+                    ///System.out.println("W==={ " + weightsOfInputs);
+                    System.out.println("THE WEIGHTS ARE > " + weightsOfInputs.get(w));
+
+
+                    inputIndex = inputIndex + 1;
+                    if(inputIndex >= getInputsList().size()){inputIndex = 0;}
+                    //System.out.println("INPUTS LIST SIZE: " + inputsList.size());
+
+                    if((w) >= (w + shifter) && w != 0){
+                        //shiftMultiplier = shiftMultiplier + 1;
+                        shifter = shifter + 1;
+                        //
+                        System.out.println("-----------------------]]]]]>>> shifter_is: " + shifter );
+                        break;
+                    }
+
+                }
+                //Increase index of where to begin getting weights in the list for each hidden neuron
+
+                System.out.println("Shifter is currently == " + shifter);
+            }
+
         //TODO: UNCOMMENT FOR LOOP AND DELETE THE ABOVE NEURONS
         /*
         //Add hidden neurons (as many as specified in NUMBER_OF_HIDDEN_LAYER_NEURONS) and initialise with random weights
@@ -122,7 +181,35 @@ public class Network {
             hn.setWeightsOfInputs(weightsOfInputs);
             hidden_layer.add(hn);
         } */
-        setHiddenNeuronsList(hidden_layer);
+
+        //Calculate the net sum and sigmoid output of each hidden neuron
+        /*int weightSection = (getHiddenNeuronsList().size());
+        int shifter = 0;
+        int limit = weightSection ;
+
+        for(int hidden = 0; hidden < weightSection ; hidden ++){
+
+            System.out.println( " ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: ++++++ HIDDEN NEURON " + hidden + " ++++++");
+            for(int w = (0 + shifter); w < weightsOfInputs.size(); w++) {
+                //If the number of hidden neurons is reached
+                if(w >= limit){
+                   break;
+                }
+                System.out.println(" +++++++ PART OF WEIGHTS >> " + allWeightsBetweenInputAndHiddenLayer.get(w));
+                System.out.println("w = " + w + " +++++++ SHIFTER = " + shifter + " LIMIT = " + limit);
+
+                //Calculate the net sum of the neuron
+
+                if(shifter > getHiddenNeuronsList().size()){
+                    break;
+                }
+            }
+            //Increase index of where to begin getting weights in the list for each hidden neuron
+            shifter = shifter + weightSection;
+            //Increase limit by the number of hidden neurons. This ensures that we start at the correct weight index for each neuron
+            limit = limit + weightSection;
+        }*/
+
         //------------------------------------------------------------------
         System.out.println(" END OF HIDDEN LAYER CREATION ");
 
@@ -142,18 +229,17 @@ public class Network {
         //give neuron the list of weights
         out1.setWeightsOfOutputsFromHiddenLayer(allWeightsBetweenHiddenAndOutputLayer);
         //add to the output layer and fire
-        output_layer.add(out1);
+
         double ns1 = out1.calculateNetSum();
         double finalOut = out1.calculateSigmoidOutput(ns1);
-
-
+        output_layer.add(out1);
         OutputNeuron out2 = new OutputNeuron(inputsForOutputNeurons, 0.60, 0.99);
         //give neuron the list of weights
         out2.setWeightsOfOutputsFromHiddenLayer(allWeightsBetweenHiddenAndOutputLayer);
         //Add to the utput layyer and fire
-        output_layer.add(out2);
         double ns2 = out2.calculateNetSum();
         double finalOut2 = out2.calculateSigmoidOutput(ns2);
+        output_layer.add(out2);
        /*
         ArrayList<Double> weightsOfHiddenLayerOutputs = new ArrayList<>();
         for(HiddenNeuron hiddenNeuron: hidden_layer){
@@ -194,6 +280,7 @@ public class Network {
         for (OutputNeuron outputNeuron : getOutputNeuronsList()) {
             //Fire the output neurons and store the outputs of each within the neuron
             double output = outputNeuron.fire();
+            System.out.println("---------------------------------------------------------------------------------------------- >>> OUTPUT " + output);
             outputs.add(output);
             //Store the output in the neuron for later use in the backpropagation algorithm
             outputNeuron.setActualOutput(output);
@@ -311,7 +398,7 @@ public class Network {
 
         //for (HiddenNeuron hiddenNeuron : getHiddenNeuronsList()) {
         for (int i = 0; i < numberOfInputs; i++) {
-            System.out.println("NEXT INPUT [ [ [----start index =--] ] ]");
+            System.out.println("NEXT INPUT [ [ [----start index =--------------------------------------------------------------------------------] ] ]");
 
             //The total output error with respect to the input weights
             //This is the sum of the output errors of each output neuron
@@ -319,8 +406,12 @@ public class Network {
 
             //For each weight
             for (int w = 0; w < weightsBetweenInputAndHiddenLayers_List.size(); w++) {
-                if (shift > numberOfInputs) { shift = 1;}
-                if (c >= numberOfInputs) { c = 0; }
+                if (shift > numberOfInputs) {
+                    shift = 1;
+                }
+                if (c >= numberOfInputs) {
+                    c = 0;
+                }
 
                 //Loop to print to terminal
                 int counter = 0;
@@ -328,10 +419,12 @@ public class Network {
                     //Get the correct multiplier weights for each derivative
                     System.out.println("    Weight needed from right-side: >> " + weightsBetweenOutputAndHiddenLayers_List.get(c + shift + counter));
                     //Calculate the total error and store it
-                    double targetOutput = getOutputNeuronsList().get(l).getTargetOutput();
-                    double actualOutput = getOutputNeuronsList().get(l).getSigmoidOutputOfTheOutputNeuron();
+                    double targetOutput = targetOutputsList.get(l);
+                    double actualOutput = actualOutputsList.get(l);
+                    System.out.println("        [ OUTPUTS : ]" + actualOutputsList);
 
-                    System.out.println("        Target = " + targetOutput + " Actual = " + actualOutput);
+                    System.out.println("        Target = " + targetOutput + " \n" +
+                            "        Actual = " + actualOutput);
 
                     totalOutputError = (-(targetOutput - actualOutput));
                     System.out.println("                totalOutputError = " + totalOutputError);
@@ -345,7 +438,7 @@ public class Network {
 
             //Find left-side (between input and hidden layer) weights related to this input
             int tracker = 0;
-            for(int t = 0; t < (weightsBetweenInputAndHiddenLayers_List.size()) ; t++){
+            for (int t = 0; t < (weightsBetweenInputAndHiddenLayers_List.size()); t++) {
                 double weightLS = weightsBetweenInputAndHiddenLayers_List.get(t + shift_w);
                 System.out.println("        Related left-side weights: >>" + weightLS);
                 //Calculate the updated weights for each weight
@@ -363,7 +456,7 @@ public class Network {
 
                 tracker = tracker + 1;
 
-                if(tracker >= numberOfInputs){
+                if (tracker >= numberOfInputs) {
                     System.out.println("<><><><>EPOCH<><><><>");
                     shift_w = shift_w + numberOfInputs;
                     break;

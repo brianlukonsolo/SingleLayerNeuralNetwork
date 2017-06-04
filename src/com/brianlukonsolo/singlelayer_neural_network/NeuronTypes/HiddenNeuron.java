@@ -58,6 +58,7 @@ public class HiddenNeuron {
         //Store the value for later use
         setNetSumOfInputToTheHiddenNeuron(netSum);
 
+
         return netSum;
     }
 
