@@ -71,7 +71,7 @@ public class Network {
 
         //TEMPORARY LISTS OF WEIGHTS:
         ArrayList<Double> allWeightsBetweenInputAndHiddenLayer = new ArrayList<>(Arrays.asList(0.15, 0.20, 0.25, 0.30));
-        ArrayList<Double> allWeightsBetweenHiddenAndOutputLayer = new ArrayList<>(Arrays.asList(0.4, 0.45, 0.50, 0.55));
+        ArrayList<Double> allWeightsBetweenHiddenAndOutputLayer = new ArrayList<>(Arrays.asList(0.4, 0.50, 0.45, 0.55));
 
         //Create input layer
         //For each input, create an input object in the input layer
@@ -107,8 +107,8 @@ public class Network {
         HiddenNeuron h1 = new HiddenNeuron(inputs_for_the_network, 0.35);
         h1.setWeightsOfInputs(allWeightsBetweenInputAndHiddenLayer);
         h1.setInputsLayerValuesList(getInputsList());
-        double sum_h1 = h1.calculateNetSum();
-        h1.calculateSigmoidOutput(sum_h1);
+        double sum_h1 = h1.calculateNetSum(); //TODO:
+        h1.calculateSigmoidOutput(sum_h1); //TODO:
 
         hidden_layer.add(h1);
         //System.out.println(" ++++++ Hidden neuron 1 net sum: " + hidden_layer.get(0).getNetSumOfInputToTheHiddenNeuron());
@@ -116,10 +116,10 @@ public class Network {
 
         //hidden neuron 1
         HiddenNeuron h2 = new HiddenNeuron(inputs_for_the_network, 0.35);
-        h2.setWeightsOfInputs(weightsOfInputs);
+        h2.setWeightsOfInputs(allWeightsBetweenInputAndHiddenLayer);
         h2.setInputsLayerValuesList(getInputsList());
-        double sum_h2 = h2.calculateNetSum();
-        h2.calculateSigmoidOutput(sum_h2);
+        double sum_h2 = h2.calculateNetSum(); //TODO:
+        h2.calculateSigmoidOutput(sum_h2); //TODO:
 
         hidden_layer.add(h2);
         //System.out.println(" ++++++ Hidden neuron 2 net sum: " + hidden_layer.get(1).getNetSumOfInputToTheHiddenNeuron());
@@ -152,8 +152,10 @@ public class Network {
                     System.out.println("INPUT VALUE AT THIS POINT = " + getInputsList().get(inputIndex));
                     //netSum = netSum + (getInputsList().get(w) * weightsOfInputs.get(w));
                     ///System.out.println("W==={ " + weightsOfInputs);
-                    System.out.println("THE WEIGHTS ARE > " + weightsOfInputs.get(w));
-
+                    System.out.println("    # LEFT SIDE WEIGHTS ARE > " + weightsOfInputs.get(w));
+                    System.out.println("    # RIGHT SIDE WEIGHTS ARE > " + allWeightsBetweenHiddenAndOutputLayer.get(w));
+                    System.out.println("    # Output of hidden neuron " + hiddenNeuronIndex + " = " + getHiddenNeuronsList().get(hiddenNeuronIndex).getSigmoidOutputOfTheHiddenNeuron());
+                    //TODO: SIGMOID OUTPUT OF HIDDEN NEURONS IS DUPLICATED!!! FIX THIS!!! loop through the hidden neurons, calculating correct sigmoid outputs for each!
 
                     inputIndex = inputIndex + 1;
                     if(inputIndex >= getInputsList().size()){inputIndex = 0;}
