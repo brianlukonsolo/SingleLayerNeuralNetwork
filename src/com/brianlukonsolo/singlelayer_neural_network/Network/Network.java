@@ -195,6 +195,9 @@ public class Network {
         int w = 0;
         int inputIndex = 0;
         int index_static = 0;
+        int hiddenNeuronIndex = 0;
+        //Storage for the updated weights
+        ArrayList<Double> updated_weights_between_inputs_and_hidden_layers = new ArrayList<>();
 
             System.out.println(" :::::::::::::::::::::::::::::::::::::::::::::::::::::: BACKPROPAGATION ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: ++++++");
             for (w = (w + (shifter)); w < weightsOfInputs.size(); w++) {
@@ -206,12 +209,49 @@ public class Network {
                 //The required weights between the hidden layer and the output layer
                 double weight_1_right = allWeightsBetweenHiddenAndOutputLayer.get(w);
                 double weight_2_right = allWeightsBetweenHiddenAndOutputLayer.get(w + 1 + 1);
+
+                //Note: The first calculation uses the first input. The second calculation uses the second input.
+                double input_1 = getInputsList().get(index_static);
+                double input_2 = getInputsList().get(index_static + 1);
+                System.out.println(">>>> INPUT 1 --> " + input_1);
+                System.out.println(">>>> INPUT 2 --> " + input_2);
+
+                //We need the outputs of the hidden neurons during the calculation of the partial derivatives
+                //The output will change as the for loop advances
+                double output_of_hidden_neuron = getHiddenNeuronsList().get(w).getSigmoidOutputOfTheHiddenNeuron();
+
+                //Finally we calculate the updated the updated weights in pairs of two
+                //
+                double outputError01 = (-(getOutputNeuronsList().get(0).getTargetOutput() - getOutputNeuronsList().get(0).getActualOutput())) * ( getOutputNeuronsList().get(0).getActualOutput() * (1 - getOutputNeuronsList().get(0).getActualOutput())) * weight_1_right;
+                double outputError02 = (-(getOutputNeuronsList().get(1).getTargetOutput() - getOutputNeuronsList().get(1).getActualOutput())) * ( getOutputNeuronsList().get(1).getActualOutput() * (1 - getOutputNeuronsList().get(1).getActualOutput())) * weight_2_right;
+                System.out.println(">>> OUTPUT ERROR 1: " + outputError01);
+                System.out.println(">>> OUTPUT ERROR 2: " + outputError02);
+                double totalOutputError = outputError01 + outputError02;
+
+                //This uses input 1
+                double error_for_equation_1 = (totalOutputError * (getHiddenNeuronsList().get(hiddenNeuronIndex).getSigmoidOutputOfTheHiddenNeuron() * (1 - getHiddenNeuronsList().get(hiddenNeuronIndex).getSigmoidOutputOfTheHiddenNeuron())) * input_1);
+                //This uses input 2
+                double error_for_equation_2 = (totalOutputError * (getHiddenNeuronsList().get(hiddenNeuronIndex).getSigmoidOutputOfTheHiddenNeuron() * (1 - getHiddenNeuronsList().get(hiddenNeuronIndex).getSigmoidOutputOfTheHiddenNeuron())) * input_2);
+                //Increment the hidden neuron index so that the next pair of calculations can use the correct hidden neuron output for the differentiation calculation
+                hiddenNeuronIndex = hiddenNeuronIndex + 1;
+                System.out.println("HIDDEN NEURON INDEX IS -========>>>>>> " + hiddenNeuronIndex);
+                System.out.println("ERROR FOR EQUATION 1 ==> " + error_for_equation_1);
+                System.out.println("ERROR FOR EQUATION 2 ==> " + error_for_equation_2);
+
+                double updatedWeight_1 = (weight_1_left - (learningRate * error_for_equation_1));
+                double updatedWeight_2 = (weight_2_left - (learningRate * error_for_equation_2));
+                System.out.println("THE UPDATED WEIGHTS: " + updatedWeight_1 + ", " + updatedWeight_2);
+
+                //Add the updated weights to the updated weights list
+                updated_weights_between_inputs_and_hidden_layers.add(updatedWeight_1);
+                updated_weights_between_inputs_and_hidden_layers.add(updatedWeight_2);
+
                 //netSum = netSum + (getInputsList().get(w) * weightsOfInputs.get(w));
                 ///System.out.println("W==={ " + weightsOfInputs);
                 System.out.println("    # LEFT SIDE WEIGHTS ARE > " + weight_1_left + ", " + weight_2_left);
                 System.out.println("    # RIGHT SIDE WEIGHTS ARE > " + weight_1_right + ", " + weight_2_right);
-                System.out.println("INPUT VALUES AT THIS POINT = " + getInputsList().get(index_static) + ", " + getInputsList().get(index_static + 1)); //Need inputs 1 and 2
-                System.out.println("    # Output of hidden neuron = " + getHiddenNeuronsList().get(w).getSigmoidOutputOfTheHiddenNeuron());
+                System.out.println("INPUT VALUES AT THIS POINT = " + input_1 + ", " + input_2); //Need inputs 1 and 2
+                System.out.println("    #> Output of hidden neuron = " + output_of_hidden_neuron);
                 //TODO: SIGMOID OUTPUT OF HIDDEN NEURONS IS DUPLICATED!!! FIX THIS!!! loop through the hidden neurons, calculating correct sigmoid outputs for each!
                 if (shifter + 1 < getInputsList().size()) {
                     shifter = shifter + 1;
@@ -231,7 +271,7 @@ public class Network {
             }
             //Increase index of where to begin getting weights in the list for each hidden neuron
 
-
+            System.out.println("#### FINALLY ---> The Updated weights between input layer and hidden layer: " + updated_weights_between_inputs_and_hidden_layers);
 
     }
 

@@ -45,7 +45,6 @@ public class OutputNeuron {
         }
         //Store the value for later use
         setNetSumOfTheInputsToTheOutputNeuron(netSum);
-        //System.out.println(" OUTPUT NEURON NET SUM ======= > " + netSum);
         return netSum;
     }
 
@@ -56,6 +55,7 @@ public class OutputNeuron {
         System.out.println("[ OutputNeuron Sigmoid function ]>>> Output of sigmoid: " + outputValue);
         //Store the value for later use
         setSigmoidOutputOfTheOutputNeuron(outputValue);
+        setActualOutput(outputValue);
         return outputValue;
     }
 
