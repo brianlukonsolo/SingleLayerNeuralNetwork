@@ -15,6 +15,8 @@ public class Network {
     //Initialise default learning-rate
     private double learningRate = 0.5;
     private double biasNeuronValue = 0.35;
+    private double acceptableDeviation = 0.05;
+    private double epochLimit = 1500;
     private int NUMBER_OF_HIDDEN_LAYER_NEURONS = 2; //TODO: Set this somehow in the main function
     private int NUMBER_OF_OUTPUT_LAYER_NEURONS = 2;
 
@@ -206,6 +208,9 @@ public class Network {
         //===============================================================================================================
         //----------------------- OUTPUT NEURON LOOP TO CALCULATE NET SUM AND OUTPUT AND ERRORS
         //===============================================================================================================
+        //Clear the actual outputs list
+        actualOutputsList.clear();
+
         int shift_index_o = 0;
         for(int x = 0; x < getHiddenNeuronsList().size() ; x++ ){
             System.out.println("===========================================================<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< OUTPUT NEURON");
@@ -343,6 +348,39 @@ public class Network {
         System.out.println("#### FINALLY ---> The Updated weights between hidden layer and output layer: " + updated_weights_between_hidden_layer_and_output_layer);
     }
 
+    public void learn(){
+        double target_1 = getTargetOutputsList().get(0);
+        double target_2 = getTargetOutputsList().get(1);
+        double actual_1 = getActualOutputsList().get(0);
+        double actual_2 = getActualOutputsList().get(1);
+        int epochCount = 0;
+        //Foward propagate and backpropagate unil the output error is minimal
+        do{
+            //Get the current Actual Outputs
+            actual_1 = getActualOutputsList().get(0);
+            actual_2 = getActualOutputsList().get(1);
+            //Foward propagate
+         fowardPropagate();
+         //Backpropagate
+         backpropagate();
+         System.out.println("======================================================================================================> Network outputs : " + actualOutputsList);
+         epochCount = epochCount + 1;
+         System.out.println("\n====== EPOCH =====\n" + epochCount);
+         //Check if the network has reached its target and if so, stop
+         if(epochCount >= epochLimit){
+             System.out.println("EPOCH LIMIT REACHED!!!");
+             System.out.println("Final outputs were: " + actualOutputsList);
+             break;
+         }
+
+         if((actual_1 < target_1 + getAcceptableDeviation() && actual_1 > target_1 - getAcceptableDeviation()) && (actual_2 < target_2 + getAcceptableDeviation() && actual_2 > target_2 - getAcceptableDeviation())){
+             System.out.println("===== NEURAL NETWORK SUCCESSFULLY TRAINED! =====\n" + actualOutputsList);
+             break;
+         }
+
+        }while(epochCount <= epochLimit + 1);
+
+    }
 
     //Get and Set
     public ArrayList<InputNeuron> getInputNeuronsList() {
@@ -431,5 +469,21 @@ public class Network {
 
     public void setErrorList(ArrayList<Double> errorList) {
         this.errorList = errorList;
+    }
+
+    public double getAcceptableDeviation() {
+        return acceptableDeviation;
+    }
+
+    public void setAcceptableDeviation(double acceptableDeviation) {
+        this.acceptableDeviation = acceptableDeviation;
+    }
+
+    public double getEpochLimit() {
+        return epochLimit;
+    }
+
+    public void setEpochLimit(double epochLimit) {
+        this.epochLimit = epochLimit;
     }
 }
