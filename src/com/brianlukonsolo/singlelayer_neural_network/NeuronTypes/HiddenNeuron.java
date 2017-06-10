@@ -1,10 +1,9 @@
 package com.brianlukonsolo.singlelayer_neural_network.NeuronTypes;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
- * Created by lordmcbrian on 29/05/2017.
+ * Created by Brian Lukonsolo on 29/05/2017.
  */
 
 //Each hidden neuron has both forward and backward connections in the network
@@ -20,10 +19,6 @@ import java.util.ArrayList;
 //
 //################################################################################
 
-//Quick note on orientation (when visualising the network)
-//Arrangement of the inputs and weights: TOP-TO-BOTTOM, with input1 on the top left and the last input in the bottom left corner.
-// This is assuming you have drawn a neural network on a piece of paper and the network runs its forward pass from
-// left to right (ie: inputs to the left, outputs to the right)
 
 public class HiddenNeuron {
     private ArrayList<Double> inputsLayerValuesList = new ArrayList<>();
@@ -37,7 +32,7 @@ public class HiddenNeuron {
     private double sigmoidOutputOfTheHiddenNeuron;
 
     //Constructor
-    public HiddenNeuron(ArrayList<Double> inputs, double bias_neuron_value){
+    public HiddenNeuron(ArrayList<Double> inputs, double bias_neuron_value) {
         this.setInputsLayerValuesList(inputs);
         this.setBias(bias_neuron_value);
         //TODO: Generate random weights for each input!!!
@@ -45,11 +40,11 @@ public class HiddenNeuron {
 
     //Methods
     //Multiplies each input with its corresponding weight then sums the results and adds a Bias value.
-    public double calculateNetSum(ArrayList<Double> relevant_weights){
+    public double calculateNetSum(ArrayList<Double> relevant_weights) {
         double netSum = bias;
 
         //Net sum of the inputs to the neuron multiplied by their weights
-        for(int i=0; i<getInputsLayerValuesList().size() ; i++){
+        for (int i = 0; i < getInputsLayerValuesList().size(); i++) {
             netSum = netSum + (getInputsLayerValuesList().get(i) * relevant_weights.get(i));
         }
         //Store the value for later use
@@ -59,9 +54,9 @@ public class HiddenNeuron {
     }
 
     //Sigmoid activation function provides the final output of the hidden neuron. The result is used as an input in the next layer.
-    public double calculateSigmoidOutput(double netInput){
+    public double calculateSigmoidOutput(double netInput) {
         //Sigmoid activation function
-        double outputValue = (1/(1 + Math.exp(-netInput)));
+        double outputValue = (1 / (1 + Math.exp(-netInput)));
         //DEBUG
         System.out.println("[ HiddenNeuron Sigmoid function ]>>> Output of sigmoid: " + outputValue);
         //Store the value for later use
@@ -70,7 +65,7 @@ public class HiddenNeuron {
     }
 
     //Fires the neuron and produces an output
-    public double fire(ArrayList<Double> relevant_weights){
+    public double fire(ArrayList<Double> relevant_weights) {
         double sigmoidOutput = calculateSigmoidOutput(calculateNetSum(relevant_weights));
         return sigmoidOutput;
     }
@@ -90,6 +85,10 @@ public class HiddenNeuron {
 
     public void setInputsLayerValuesList(ArrayList<Double> inputsLayerValuesList) {
         this.inputsLayerValuesList = inputsLayerValuesList;
+    }
+
+    public double getBias() {
+        return bias;
     }
 
     public void setBias(double bias) {

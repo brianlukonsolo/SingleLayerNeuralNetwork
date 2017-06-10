@@ -3,7 +3,7 @@ package com.brianlukonsolo.singlelayer_neural_network.NeuronTypes;
 import java.util.ArrayList;
 
 /**
- * Created by lordmcbrian on 29/05/2017.
+ * Created by Brian Lukonsolo on 29/05/2017.
  */
 
 //Each output neuron only has backward connections in the network, from right to left
@@ -28,19 +28,19 @@ public class OutputNeuron {
 
 
     //Constructor
-    public OutputNeuron(ArrayList<Double> outputs_of_hidden_layer_list, double bias_neuron_value, double target_output){
+    public OutputNeuron(ArrayList<Double> outputs_of_hidden_layer_list, double bias_neuron_value, double target_output) {
         this.setHiddenLayerOutputValuesList(outputs_of_hidden_layer_list);
         this.setBias(bias_neuron_value);
         this.setTargetOutput(target_output);
     }
 
     //Methods
-    public double calculateNetSum(ArrayList<Double> relevant_weights){
+    public double calculateNetSum(ArrayList<Double> relevant_weights) {
         //Net sum of the inputs to the neuron multiplied by their weights
         double netSum = bias;
 
         //Net sum of the inputs to the neuron multiplied by their weights
-        for(int i=0; i<getHiddenLayerOutputValuesList().size() ; i++){
+        for (int i = 0; i < getHiddenLayerOutputValuesList().size(); i++) {
             netSum = netSum + (getHiddenLayerOutputValuesList().get(i) * relevant_weights.get(i));
         }
         //Store the value for later use
@@ -48,9 +48,9 @@ public class OutputNeuron {
         return netSum;
     }
 
-    public double calculateSigmoidOutput(double netInput){
+    public double calculateSigmoidOutput(double netInput) {
         //Sigmoid activation function
-        double outputValue = (1/(1 + Math.exp(-netInput)));
+        double outputValue = (1 / (1 + Math.exp(-netInput)));
         //DEBUG
         System.out.println("[ OutputNeuron Sigmoid function ]>>> Output of sigmoid: " + outputValue);
         //Store the value for later use
@@ -60,7 +60,7 @@ public class OutputNeuron {
     }
 
     //Fires the neuron and produces an output
-    public double fire(ArrayList<Double> relevant_weights){
+    public double fire(ArrayList<Double> relevant_weights) {
         double sigmoidOutput = calculateSigmoidOutput(calculateNetSum(relevant_weights));
         return sigmoidOutput;
     }

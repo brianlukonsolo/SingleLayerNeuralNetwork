@@ -1,9 +1,7 @@
 package com.brianlukonsolo.singlelayer_neural_network.NeuronTypes;
 
-import java.util.ArrayList;
-
 /**
- * Created by lordmcbrian on 29/05/2017.
+ * Created by Brian Lukonsolo on 29/05/2017.
  */
 public class InputNeuron {
     //Each input neuron only has forward connections in the network, from left to right
@@ -11,10 +9,8 @@ public class InputNeuron {
 
     //Each input-neuron has one input
     private double inputValue;
-    //Connections to hidden layer
-    private ArrayList<Double> hiddenLayerWeights = new ArrayList<>();
 
-    public InputNeuron(double inputValue){
+    public InputNeuron(double inputValue) {
         this.setInputValue(inputValue);
     }
 
