@@ -34,10 +34,10 @@ public class NeuralNetwork {
 
       System.out.println("\n----------------------------THE FORWARD-PASS------------------------------------");
       //Forward pass
-      neuralNetwork.fowardPropagate();
+      //neuralNetwork.fowardPropagate();
 
       //TODO: neuralNetwork.backpropagate
-      neuralNetwork.backpropagate();
+      //neuralNetwork.backpropagate();
 
       //TODO: neuralNetwork.updateAllWeights
 

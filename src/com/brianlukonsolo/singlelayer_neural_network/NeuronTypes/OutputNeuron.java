@@ -35,20 +35,17 @@ public class OutputNeuron {
     }
 
     //Methods
-    public double calculateNetSum(){
+    public double calculateNetSum(ArrayList<Double> relevant_weights){
         //Net sum of the inputs to the neuron multiplied by their weights
         double netSum = bias;
-        for(double d: hiddenLayerOutputValuesList) {
-            //For each input, multiply by it's weight in the weightsOfInputsList
-            netSum = netSum + (d * weightsOfOutputsFromHiddenLayer.get(hiddenLayerOutputValuesList.indexOf(d)));
-            //DEBUG
-            System.out.println("[ OutputNeuron Sum function ]>>> MULTIPLYING: " + d + " and " + weightsOfOutputsFromHiddenLayer.get(hiddenLayerOutputValuesList.indexOf(d)));
-            //Add to the total
+
+        //Net sum of the inputs to the neuron multiplied by their weights
+        for(int i=0; i<getHiddenLayerOutputValuesList().size() ; i++){
+            netSum = netSum + (getHiddenLayerOutputValuesList().get(i) * relevant_weights.get(i));
         }
-        System.out.println("[ HiddenNeuron net Sum function ]>>> Net sum is : " + netSum);
         //Store the value for later use
         setNetSumOfTheInputsToTheOutputNeuron(netSum);
-
+        //System.out.println(" OUTPUT NEURON NET SUM ======= > " + netSum);
         return netSum;
     }
 
@@ -63,8 +60,8 @@ public class OutputNeuron {
     }
 
     //Fires the neuron and produces an output
-    public double fire(){
-        double sigmoidOutput = calculateSigmoidOutput(calculateNetSum());
+    public double fire(ArrayList<Double> relevant_weights){
+        double sigmoidOutput = calculateSigmoidOutput(calculateNetSum(relevant_weights));
         return sigmoidOutput;
     }
 

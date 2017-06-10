@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="47c259ea-ea25-4409-abf5-161574ec2b5f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SingleLayerNeuralNetwork/com/brianlukonsolo/singlelayer_neural_network/Network/Network.class" afterPath="$PROJECT_DIR$/out/production/SingleLayerNeuralNetwork/com/brianlukonsolo/singlelayer_neural_network/Network/Network.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/brianlukonsolo/singlelayer_neural_network/Network/Network.java" afterPath="$PROJECT_DIR$/src/com/brianlukonsolo/singlelayer_neural_network/Network/Network.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/brianlukonsolo/singlelayer_neural_network/NeuronTypes/HiddenNeuron.java" afterPath="$PROJECT_DIR$/src/com/brianlukonsolo/singlelayer_neural_network/NeuronTypes/HiddenNeuron.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/brianlukonsolo/singlelayer_neural_network/NeuralNetwork/NeuralNetwork.java" afterPath="$PROJECT_DIR$/src/com/brianlukonsolo/singlelayer_neural_network/NeuralNetwork/NeuralNetwork.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/brianlukonsolo/singlelayer_neural_network/NeuronTypes/OutputNeuron.java" afterPath="$PROJECT_DIR$/src/com/brianlukonsolo/singlelayer_neural_network/NeuronTypes/OutputNeuron.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,8 +21,8 @@
       <file leaf-file-name="NeuralNetwork.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/brianlukonsolo/singlelayer_neural_network/NeuralNetwork/NeuralNetwork.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="22" column="41" lean-forward="false" selection-start-line="22" selection-start-column="40" selection-end-line="22" selection-end-column="41" />
+            <state relative-caret-position="342">
+              <caret line="36" column="8" lean-forward="false" selection-start-line="36" selection-start-column="8" selection-end-line="36" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -31,8 +31,8 @@
       <file leaf-file-name="Network.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/brianlukonsolo/singlelayer_neural_network/Network/Network.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="478">
-              <caret line="153" column="148" lean-forward="false" selection-start-line="153" selection-start-column="148" selection-end-line="153" selection-end-column="148" />
+            <state relative-caret-position="53">
+              <caret line="198" column="87" lean-forward="false" selection-start-line="198" selection-start-column="87" selection-end-line="198" selection-end-column="87" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -53,8 +53,8 @@
       <file leaf-file-name="HiddenNeuron.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/brianlukonsolo/singlelayer_neural_network/NeuronTypes/HiddenNeuron.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="51" column="64" lean-forward="false" selection-start-line="51" selection-start-column="64" selection-end-line="51" selection-end-column="64" />
+            <state relative-caret-position="442">
+              <caret line="71" column="43" lean-forward="false" selection-start-line="71" selection-start-column="43" selection-end-line="71" selection-end-column="43" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -65,8 +65,8 @@
       <file leaf-file-name="OutputNeuron.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/brianlukonsolo/singlelayer_neural_network/NeuronTypes/OutputNeuron.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="680">
-              <caret line="40" column="34" lean-forward="false" selection-start-line="40" selection-start-column="34" selection-end-line="40" selection-end-column="34" />
+            <state relative-caret-position="204">
+              <caret line="47" column="10" lean-forward="false" selection-start-line="47" selection-start-column="10" selection-end-line="47" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -114,9 +114,9 @@
         <option value="$PROJECT_DIR$/src/NeuralNetwork/NeuralNetwork.java" />
         <option value="$PROJECT_DIR$/src/com/brianlukonsolo/NeuralNetwork/NeuralNetwork.java" />
         <option value="$PROJECT_DIR$/src/com/brianlukonsolo/singlelayer_neural_network/NeuronTypes/InputNeuron.java" />
-        <option value="$PROJECT_DIR$/src/com/brianlukonsolo/singlelayer_neural_network/NeuralNetwork/NeuralNetwork.java" />
-        <option value="$PROJECT_DIR$/src/com/brianlukonsolo/singlelayer_neural_network/NeuronTypes/OutputNeuron.java" />
         <option value="$PROJECT_DIR$/src/com/brianlukonsolo/singlelayer_neural_network/NeuronTypes/HiddenNeuron.java" />
+        <option value="$PROJECT_DIR$/src/com/brianlukonsolo/singlelayer_neural_network/NeuronTypes/OutputNeuron.java" />
+        <option value="$PROJECT_DIR$/src/com/brianlukonsolo/singlelayer_neural_network/NeuralNetwork/NeuralNetwork.java" />
         <option value="$PROJECT_DIR$/src/com/brianlukonsolo/singlelayer_neural_network/Network/Network.java" />
       </list>
     </option>
@@ -143,8 +143,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -226,6 +224,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="RunDashboard">
@@ -489,6 +489,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -942,17 +943,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/brianlukonsolo/singlelayer_neural_network/NeuronTypes/OutputNeuron.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="40" column="34" lean-forward="false" selection-start-line="40" selection-start-column="34" selection-end-line="40" selection-end-column="34" />
+        <state relative-caret-position="204">
+          <caret line="47" column="10" lean-forward="false" selection-start-line="47" selection-start-column="10" selection-end-line="47" selection-end-column="10" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/brianlukonsolo/singlelayer_neural_network/NeuralNetwork/NeuralNetwork.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="22" column="41" lean-forward="false" selection-start-line="22" selection-start-column="40" selection-end-line="22" selection-end-column="41" />
+        <state relative-caret-position="342">
+          <caret line="36" column="8" lean-forward="false" selection-start-line="36" selection-start-column="8" selection-end-line="36" selection-end-column="8" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/brianlukonsolo/singlelayer_neural_network/NeuronTypes/HiddenNeuron.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="71" column="43" lean-forward="false" selection-start-line="71" selection-start-column="43" selection-end-line="71" selection-end-column="43" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -964,20 +975,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/brianlukonsolo/singlelayer_neural_network/NeuronTypes/HiddenNeuron.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="51" column="64" lean-forward="false" selection-start-line="51" selection-start-column="64" selection-end-line="51" selection-end-column="64" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/brianlukonsolo/singlelayer_neural_network/Network/Network.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="478">
-          <caret line="153" column="148" lean-forward="false" selection-start-line="153" selection-start-column="148" selection-end-line="153" selection-end-column="148" />
+        <state relative-caret-position="53">
+          <caret line="198" column="87" lean-forward="false" selection-start-line="198" selection-start-column="87" selection-end-line="198" selection-end-column="87" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
