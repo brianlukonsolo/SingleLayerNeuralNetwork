@@ -69,24 +69,7 @@ public class Network {
         //TODO: USE FOR LOOP
         input_layer.add(new InputNeuron(getInputsList().get(0)));
         input_layer.add(new InputNeuron(getInputsList().get(1)));
-        System.out.println("===================================================================================================================" + getInputsList().get(0));
-        //TODO: UNCOMMENT FOR LOOP AND DELETE THE ABOVE NEURONS
-       /* ArrayList<Double> inputValuesListForNetwork = new ArrayList<>();
-        for(double d: inputs_for_the_network){
-            inputValuesListForNetwork.add(d);
-        } */
-
-        //
-        //TODO: UNCOMMENT FOR LOOP AND DELETE ABOVE WEIGHT LIST
-        //Create arraylist holding random weights for the inputs
-        /*ArrayList<Double> weightsOfInputs = new ArrayList<>();
-        for(InputNeuron inp: input_layer){
-            weightsOfInputs.add(random.nextDouble());
-        }*/
-
-        //Create the input layer
         setInputNeuronsList(input_layer);
-        //------------------------------------------------------------------
         //END OF INPUT LAYER CREATION
 
 
@@ -138,7 +121,6 @@ public class Network {
         for (HiddenNeuron hiddenNeuron : hidden_layer) {
             inputsForOutputNeurons.add(hiddenNeuron.getSigmoidOutputOfTheHiddenNeuron());
         }
-
         //add two output neurons to the output layer----------------------------------------OUTPUT NEURON LAYER
         OutputNeuron out1 = new OutputNeuron(inputsForOutputNeurons, 0.60, getTargetOutputsList().get(0));
         out1.setWeightsOfOutputsFromHiddenLayer(allWeightsBetweenHiddenAndOutputLayer);
@@ -152,11 +134,10 @@ public class Network {
         setOutputNeuronsList(output_layer);
 
         //Finally, set the target-outputs and actual outputs list
-        //It contains a list of target outputs, each coressponding to an output neuron
+        //It contains a list of target outputs, each corresponding to an output neuron
         for (OutputNeuron o : getOutputNeuronsList()) {
             targetOutputsList.add(o.getTargetOutput());
         }
-
         //===============================================================================================================
         //----------------------- OUTPUT NEURON LOOP TO CALCULATE NET SUM AND OUTPUT AND ERRORS
         //===============================================================================================================
@@ -175,11 +156,10 @@ public class Network {
             double output = getOutputNeuronsList().get(x).fire(relevantWeights_o);
             actualOutputsList.add(output);
         }
-
         //END OF OUTPUT LAYER CREATION
     }
 
-    //The foward pass of the neural network
+    //The forward pass of the neural network
     public void fowardPropagate() {
         ArrayList<Double> allWeightsBetweenInputAndHiddenLayer = getHiddenNeuronsList().get(0).getWeightsOfInputs();
         ArrayList<Double> allWeightsBetweenHiddenAndOutputLayer = getOutputNeuronsList().get(0).getWeightsOfOutputsFromHiddenLayer();
@@ -227,14 +207,11 @@ public class Network {
 
     }
 
-    //An implementation of the Backpropagation algorithm based on the calculation of partial derivatives
     public void backpropagate() {
         ArrayList<Double> allWeightsBetweenInputAndHiddenLayer = getHiddenNeuronsList().get(0).getWeightsOfInputs();
         ArrayList<Double> allWeightsBetweenHiddenAndOutputLayer = getOutputNeuronsList().get(0).getWeightsOfOutputsFromHiddenLayer();
         ArrayList<Double> weightsOfInputs = allWeightsBetweenInputAndHiddenLayer;
-        //===============================================================================================================
-        //-----------------------BACKPROPAGATION LOOP
-        //===============================================================================================================
+
         //FOR EACH HIDDEN NEURON IN THE HIDDEN LAYER WE WANT TO CALCULATE THE CORRECT NET SUM
         int shifter = 0;
         int w = 0;
@@ -293,7 +270,6 @@ public class Network {
             double updatedWeight_2_right = weight_2_right - (learningRate * weight_error_2);
             updated_weights_between_hidden_layer_and_output_layer.add(updatedWeight_1_right);
             updated_weights_between_hidden_layer_and_output_layer.add(updatedWeight_2_right);
-
             //Increment shifter
             if (shifter + 1 < getInputsList().size()) {
                 shifter = shifter + 1;
@@ -302,16 +278,14 @@ public class Network {
             if (inputIndex >= getInputsList().size()) {
                 inputIndex = 0;
             }
-
             //If w increases to more than the number of inputs, end the loop
             if (w >= getInputsList().size() - 1) {
                 break;
             }
         }
 
-        //Update the network weights
         //===============================================================================================================
-        //-----------------------UPDATE NETWORK WEIGHTS LOOPS
+        //-----------------------UPDATE NETWORK WEIGHTS
         //===============================================================================================================
         for (int i = 0; i < getHiddenNeuronsList().size(); i++) {
             getHiddenNeuronsList().get(i).setWeightsOfInputs(updated_weights_between_inputs_and_hidden_layers);
@@ -332,7 +306,7 @@ public class Network {
         double actual_2;
         //Keep track of epochs
         int epochCount = 0;
-        //Foward propagate and backpropagate until the output error is minimal
+        //Forward propagate and backpropagate until the output error is minimal
         do {
             System.out.println("\n#######====== EPOCH " + epochCount + " =====#######\n");
             //Get the current Actual Outputs
@@ -345,7 +319,6 @@ public class Network {
             System.out.println("[ Backpropagation ]=> Network outputs : " + actualOutputsList);
             epochCount = epochCount + 1;
             System.out.println("#############################\n");
-
             //Check if the network has reached its target and if so, stop
             if (epochCount >= epochLimit) {
                 System.out.println("\n#######====== EPOCH " + epochCount + " =====#######\n");
@@ -370,9 +343,7 @@ public class Network {
                 System.out.println("[[[ ------------------------------------------------------------------------------------------------------------------------------------------ ]]]");
                 break;
             }
-
         } while (epochCount <= epochLimit + 1);
-
     }
 
     //Get and Set
