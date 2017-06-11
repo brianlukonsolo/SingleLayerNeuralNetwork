@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="SingleLayerNeuralNetwork:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/SingleLayerNeuralNetwork_jar</output-path>
+    <root id="archive" name="SingleLayerNeuralNetwork.jar">
+      <element id="module-output" name="SingleLayerNeuralNetwork" />
+    </root>
+  </artifact>
+</component>
